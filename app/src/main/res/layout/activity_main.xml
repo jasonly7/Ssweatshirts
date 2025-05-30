@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/horizontalLinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/switch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            />
+    <LinearLayout
+        android:id="@+id/horizontalLinearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:id="@+id/sweater1"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/blackcrew"
+            android:layout_margin="20dp"
+            android:contentDescription="Draggable Image" />
+
+        <ImageView
+            android:id="@+id/sweater2"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/light_steel_crew"
+            android:layout_margin="20dp"
+            android:contentDescription="Draggable Image 2" />
+
+        <ImageView
+            android:id="@+id/sweater3"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/sand_crew"
+            android:layout_margin="20dp"
+            android:contentDescription="Draggable Image 3" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Size"
+        android:textSize="20sp">
+    </TextView>
+
+
+    <RadioGroup
+        android:id="@+id/myRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioOption1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"
+            android:textSize="20sp"/>
+
+        <RadioButton
+            android:id="@+id/radioOption2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"
+            android:textSize="20sp"/>
+
+        <RadioButton
+            android:id="@+id/radioOption3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="L"
+            android:textSize="20sp"/>
+
+        <RadioButton
+            android:id="@+id/radioOption4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XL"
+            android:textSize="20sp"/>
+
+    </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/horizontalLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Initials"
+                android:textSize="20sp">
+            </TextView>
+            <com.google.android.material.textfield.TextInputEditText
+                android:maxLength="4"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:textSize="20sp"
+
+                android:hint="4 letters max"/>
+
+        </LinearLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/dropTarget"
+        android:layout_width="800dp"
+        android:layout_height="800dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        android:background="#CCCCCC"
+        >
+        <ImageView
+            android:id="@+id/shirtImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Shirt Image"
+            android:gravity="center"
+            android:src="@drawable/blackcrew"
+            android:scaleType="fitXY"/>
+
+
+        <ImageView
+            android:id="@+id/selectedImage"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+
+            android:contentDescription="Draggable Image"
+            android:gravity="center|center_horizontal|center_vertical" />
+
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+    </FrameLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10sp"></Space>
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        />
+    </LinearLayout>
+</RelativeLayout>
