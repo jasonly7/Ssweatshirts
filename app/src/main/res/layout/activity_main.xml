@@ -14,14 +14,7 @@
         android:orientation="vertical"
         >
 
-        <Button
-            android:id="@+id/switch_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Back"
-            android:layout_centerInParent="true"
-            android:textSize="20sp"
-            />
+
     <LinearLayout
         android:id="@+id/horizontalLinearLayout3"
         android:layout_width="match_parent"
@@ -156,16 +149,29 @@
         </TextView>
 
     </FrameLayout>
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="10sp"></Space>
+
+    <LinearLayout
+        android:id="@+id/bottomHorizontalLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <Button
+            android:id="@+id/switch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            />
     <Button
         android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="Submit"
         android:layout_centerInParent="true"
         android:textSize="20sp"
         />
+    </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
