@@ -13,7 +13,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
-
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Congrats on exploring TikTok World Canada 2025! Before you grab your custom swag, tell us:\n "
+            android:textSize="30sp"
+            android:visibility="gone"
+            app:fontFamily="@font/tiktok" />
+        <Button
+            android:id="@+id/signin_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            />
+        <Button
+            android:id="@+id/signout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign out"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -111,7 +136,7 @@
             </TextView>
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameTextInput"
-                android:layout_width="200sp"
+                android:layout_width="300sp"
                 android:layout_height="50sp"
                 android:textSize="20sp"
                 />
@@ -132,11 +157,12 @@
             </TextView>
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailTextInput"
-                android:layout_width="200sp"
+                android:layout_width="300sp"
                 android:layout_height="50sp"
                 android:textSize="20sp"
                 />
         </LinearLayout>
+
     <Button
         android:id="@+id/switch_button"
         android:layout_width="wrap_content"

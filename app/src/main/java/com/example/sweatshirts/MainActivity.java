@@ -6,16 +6,22 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -26,7 +32,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.http.FileContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -38,12 +46,15 @@ import com.google.api.services.drive.DriveScopes;
 
 import kotlinx.coroutines.channels.TickerChannelsKt;
 import java.io.*;
+import java.util.Objects;
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 
 public class MainActivity extends AppCompatActivity {
-    //private RadioButton radioOption1,radioOption2, radioOption3;
+    private RadioButton radioOption1,radioOption2, radioOption3,radioOption4;
+    private RadioGroup sizeRadioGroup;
     private ImageView sweater1,sweater2, sweater3;
+    private TextInputEditText initialsTextInput;
     private ImageView shirtImageView;
     private Drawable drawable;
     private Data data;
@@ -66,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private Drive mDriveService;
 
-
+    private static final String EMAILTAG = "EmailFileSender";
+    private Button sendEmailButton;
+    private File fileToSend; // The file we'll attach
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +103,18 @@ public class MainActivity extends AppCompatActivity {
             Log.d("MainActivity", "Received: Name=" + data.getName() );
             Log.d("MainActivity", "Received: Email=" + data.getEmail() );
         }
-        Button signinButton = findViewById(R.id.signin_button);
+
         Button submitButton = findViewById(R.id.submit_button);
         Button switchButton = findViewById(R.id.switch_button);
         sweater1 = findViewById(R.id.sweater1);
         sweater2 = findViewById(R.id.sweater2);
         sweater3 = findViewById(R.id.sweater3);
+        sizeRadioGroup = findViewById(R.id.sizeRadioGroup);
+        radioOption1 = findViewById(R.id.radioOption1);
+        radioOption2 = findViewById(R.id.radioOption2);
+        radioOption3 = findViewById(R.id.radioOption3);
+        radioOption4 = findViewById(R.id.radioOption4);
+        initialsTextInput = findViewById(R.id.initialsTextInput);
 
         shirtImageView = findViewById(R.id.shirtImageView);
 
@@ -103,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             int resourceId = getResources().getIdentifier("blackcrew","drawable", getPackageName());
             shirtImageView.setImageResource(resourceId);
             drawable = shirtImageView.getDrawable();
-
+            data.setColor("blackcrew");
             shirtImageView.setImageDrawable(drawable);
         });
 
@@ -111,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             int resourceId = getResources().getIdentifier("light_steel_crew","drawable", getPackageName());
             shirtImageView.setImageResource(resourceId);
             drawable = shirtImageView.getDrawable();
+            data.setColor("light steel crew");
             shirtImageView.setImageDrawable(drawable);
         });
 
@@ -118,8 +138,41 @@ public class MainActivity extends AppCompatActivity {
             int resourceId = getResources().getIdentifier("sand_crew","drawable", getPackageName());
             shirtImageView.setImageResource(resourceId);
             drawable = shirtImageView.getDrawable();
+            data.setColor("sand crew");
             shirtImageView.setImageDrawable(drawable);
         });
+
+        // Set the listener for the RadioGroup
+        sizeRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // `group` is the RadioGroup that received the change
+                // `checkedId` is the ID of the RadioButton that is now checked
+
+                // Find the selected RadioButton by its ID
+                RadioButton selectedRadioButton = findViewById(checkedId);
+
+                if (selectedRadioButton != null) {
+                    String selectedOption = selectedRadioButton.getText().toString();
+                    //selectionStatusTextView.setText("Selected: " + selectedOption);
+                    data.setSize(selectedOption);
+                    Toast.makeText(MainActivity.this, "You selected: " + selectedOption, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+       /* radioOption1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                data.setSize();
+            }
+        });
+
+        radioOption2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });*/
 
         switchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                 //   - Context: The current Activity (MainActivity.this)
                 //   - Class: The Activity you want to start (SecondActivity.class)
                 Intent intent = new Intent(MainActivity.this, TikTokActivity.class);
-                intent.putExtra("data",data);
+                intent.putExtra("data", data);
                 // 4. Start the new Activity using the Intent
                 startActivity(intent);
 
@@ -143,35 +196,77 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Configure Google Sign-In for Drive scope
-        GoogleSignInOptions signInOptions =
-                new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestEmail()
-                        .requestScopes(new Scope(DriveScopes.DRIVE_FILE)) // Request scope for specific file access
-                        // .requestScopes(new Scope(DriveScopes.DRIVE_APPDATA)) // If you need app-specific folder
-                        // .requestScopes(new Scope(DriveScopes.DRIVE)) // Full Drive access (be careful with this!)
-                        .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, signInOptions);
-
-        signinButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String fileName = "test.txt";
-                String fileContent = "blah blah blah";
-                File file = saveTextToFile(fileName, fileContent);
+                String fileContent = "Name: " + data.getName() +
+                        "\nEmail: " + data.getEmail() + "\n\n" +
+                        "Which TikTok Solutions are you most interested in learning more about?\n";
 
-                uploadFileToDrive(file);
+                String solution;
+                for (int i = 0; i < data.getsTikTokSolutions().length; i++)
+                {
+                    boolean checked = data.getCheckedTikTokSolutionAt(i);
+                    if (checked) {
+                        solution = data.getCheckedTikTokSolutionTextAt(i);
+                        solution = solution.substring(0, solution.indexOf(":")) + "\n";
+                        fileContent += solution;
+                    }
+                }
+                fileContent+="\n";
+                fileContent+="Color: " + data.getColor();
+                fileContent+="\n";
+                fileContent+="Size: " + data.getSize();
+                data.setInitials(Objects.requireNonNull(initialsTextInput.getText()).toString());
+                fileContent+="\n";
+                fileContent+="Initials: " + data.getInitials();
+                //File file = saveTextToFile(fileName, fileContent);
 
+                //uploadFileToDrive(file);
+                createDummyFile(fileContent);
+                sendEmailWithAttachment(fileToSend);
             }
         });
     }
+
+    private void sendEmailWithAttachment(File file) {
+        // 2. Get the URI for the file using FileProvider
+        // IMPORTANT: You MUST set up FileProvider in your AndroidManifest.xml and res/xml/file_paths.xml
+        // (See step 3 below)
+        Uri fileUri = null;
+        try {
+            fileUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", file);
+        } catch (IllegalArgumentException e) {
+            Log.e(EMAILTAG, "The selected file can't be shared: " + e.getMessage());
+            Toast.makeText(this, "Could not share file.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        // Set the MIME type based on the file. Use "message/rfc822" for email if you don't know the exact type.
+        // For a text file: "text/plain"
+        // For a PDF: "application/pdf"
+        // For an image: "image/jpeg"
+        emailIntent.setType("text/plain"); // Or use getMimeType(file.getAbsolutePath()) for dynamic type
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"panda@peaceandcotton.com,gamedude30a@gmail.com"}); // Optional: Pre-fill recipients
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Attached File from Sweatshirt App");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Please find the attached document.");
+        emailIntent.putExtra(Intent.EXTRA_STREAM, fileUri); // Attach the file URI
+
+        // Grant read permission to the email app temporarily
+        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        // Verify that there's an app that can handle this intent
+        if (emailIntent.resolveActivity(getPackageManager()) != null) {
+            // Start the email client picker
+            startActivity(Intent.createChooser(emailIntent, "Send email using..."));
+        } else {
+            Toast.makeText(this, "No email client found.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -221,22 +316,7 @@ public class MainActivity extends AppCompatActivity {
         // Now mDriveService is ready to make API calls
     }
 
-    /**
-     * Build and return an authorized Drive Activity client service.
-     *
-     * @return an authorized DriveActivity client service
-     * @throws IOException
 
-    public static com.google.api.services.driveactivity.v2.DriveActivity getDriveActivityService()
-            throws IOException {
-        Credential credential = authorize();
-        com.google.api.services.driveactivity.v2.DriveActivity service =
-                new com.google.api.services.driveactivity.v2.DriveActivity.Builder(
-                        HTTP_TRANSPORT, JSON_FACTORY, credential)
-                        .setApplicationName(APPLICATION_NAME)
-                        .build();
-        return service;
-    }*/
 
     // ... uploadFileToDrive() method will go here
     private void uploadFileToDrive(File fileToUpload) {
@@ -302,12 +382,34 @@ public class MainActivity extends AppCompatActivity {
         return type != null ? type : "application/octet-stream"; // Default if unknown
     }
 
+    private void createDummyFile(String content) {
+        // Get the cache directory (good for temporary files)
+        File cachePath = new File(getCacheDir(), "attachments");
+        if (!cachePath.exists()) {
+            cachePath.mkdirs(); // Create the directory if it doesn't exist
+        }
+
+        fileToSend = new File(cachePath, "sweatshirt.txt");
+
+        try (FileOutputStream fos = new FileOutputStream(fileToSend)) {
+            /*String content = "This is the content of the attached document.\n";
+            content += "You can put any text data here.\n";
+            content += "Hello from Android App!";*/
+            fos.write(content.getBytes());
+            Log.d(TAG, "Dummy file created: " + fileToSend.getAbsolutePath());
+        } catch (IOException e) {
+            Log.e(TAG, "Error creating dummy file: " + e.getMessage());
+            Toast.makeText(this, "Failed to create dummy file.", Toast.LENGTH_SHORT).show();
+            fileToSend = null; // Mark as null if creation failed
+        }
+    }
+
     private File saveTextToFile(String fileName, String content) {
         // Option 1: Using getFilesDir() for persistent private storage
         File file = new File(getFilesDir(), fileName);
 
         // Option 2: Using getCacheDir() for temporary private storage (uncomment to use)
-        // File file = new File(getCacheDir(), fileName);
+        //File file = new File(getCacheDir(), fileName);
 
         try (FileOutputStream fos = new FileOutputStream(file);
              OutputStreamWriter osw = new OutputStreamWriter(fos);

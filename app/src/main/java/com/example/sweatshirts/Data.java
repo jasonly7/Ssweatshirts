@@ -13,6 +13,18 @@ public class Data implements Serializable {
     private String name;
     private String email;
 
+    private String color;
+    private String size;
+    private String initials;
+    private boolean[] bTikTokSolutions;
+    private String[] sTikTokSolutions;
+
+    public Data()
+    {
+        bTikTokSolutions = new boolean[7];
+        sTikTokSolutions = new String[7];
+    }
+
     // Getters and Setters (standard practice)
     public String getName() {
         return name;
@@ -28,5 +40,59 @@ public class Data implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean[] getTikTokSolutions() {
+        return bTikTokSolutions;
+    }
+
+    public void setTikTokSolutions(boolean[] tikTokSolutions) {
+        bTikTokSolutions = tikTokSolutions;
+    }
+
+    public String[] getsTikTokSolutions() {
+        return sTikTokSolutions;
+    }
+
+    public void setsTikTokSolutions(String[] sTikTokSolutions) {
+        this.sTikTokSolutions = sTikTokSolutions;
+    }
+
+    public void setCheckedTikTokSolutionAt(int index, boolean bTikTokSolutions) {
+        this.bTikTokSolutions[index] = bTikTokSolutions;
+    }
+    public void setCheckedTikTokSolutionTextAt(int index, String sTikTokSolutions) {
+        this.sTikTokSolutions[index] = sTikTokSolutions;
+    }
+
+    public boolean getCheckedTikTokSolutionAt(int index) {
+        return this.bTikTokSolutions[index];
+    }
+    public String getCheckedTikTokSolutionTextAt(int index) {
+        return this.sTikTokSolutions[index];
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getInitials() {
+        return initials;
+    }
+
+    public void setInitials(String initials) {
+        this.initials = initials;
     }
 }
