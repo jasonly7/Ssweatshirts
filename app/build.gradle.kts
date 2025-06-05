@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.sweatshirts"
+    namespace = "com.peaceandcotton.sweatshirts"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.sweatshirts"
+        applicationId = "com.peaceandcotton.sweatshirts"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -18,6 +18,7 @@ android {
 
     buildTypes {
         release {
+            isDebuggable = false
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

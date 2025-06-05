@@ -1,4 +1,4 @@
-package com.example.sweatshirts;
+package com.peaceandcotton.sweatshirts;
 
 import android.graphics.Paint;
 import android.graphics.Typeface;

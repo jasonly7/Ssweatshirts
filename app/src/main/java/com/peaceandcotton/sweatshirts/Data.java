@@ -1,4 +1,4 @@
-package com.example.sweatshirts;
+package com.peaceandcotton.sweatshirts;
 
 import java.io.Serializable;
 
@@ -18,6 +18,7 @@ public class Data implements Serializable {
     private String initials;
     private boolean[] bTikTokSolutions;
     private String[] sTikTokSolutions;
+    private String Logo;
 
     public Data()
     {
@@ -94,5 +95,13 @@ public class Data implements Serializable {
 
     public void setInitials(String initials) {
         this.initials = initials;
+    }
+
+    public String getLogo() {
+        return Logo;
+    }
+
+    public void setLogo(String logo) {
+        Logo = logo;
     }
 }

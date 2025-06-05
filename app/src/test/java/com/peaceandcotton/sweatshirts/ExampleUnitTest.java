@@ -1,4 +1,4 @@
-package com.example.sweatshirts;
+package com.peaceandcotton.sweatshirts;
 
 import org.junit.Test;
 

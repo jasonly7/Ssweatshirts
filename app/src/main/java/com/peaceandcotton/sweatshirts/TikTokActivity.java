@@ -1,4 +1,4 @@
-package com.example.sweatshirts;
+package com.peaceandcotton.sweatshirts;
 
 import android.graphics.Typeface;
 import android.os.Build;
@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Toast;
 
+import com.peaceandcotton.sweatshirts.CustomTypefaceSpan;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
