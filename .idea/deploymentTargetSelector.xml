@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-06-04T18:17:43.246583600Z">
+        <DropdownSelection timestamp="2025-06-06T13:50:06.422861500Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Jason\.android\avd\Pixel_Tablet_API_Baklava.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Jason\.android\avd\Lenovo_Tab_M8_Gen_4_8_MTK_Tablet.avd" />
             </handle>
           </Target>
         </DropdownSelection>

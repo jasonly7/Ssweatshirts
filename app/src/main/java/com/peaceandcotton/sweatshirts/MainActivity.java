@@ -201,8 +201,8 @@ public class MainActivity extends AppCompatActivity {
                 if (selectedRadioButton != null) {
                     String selectedOption = selectedRadioButton.getText().toString();
                     ViewGroup.LayoutParams imageParams = selectedImage.getLayoutParams();
-                    int widthInPx = ConvertDpToPixels (150);
-                    int heightInPx = ConvertDpToPixels (150);
+                    int widthInPx = ConvertDpToPixels (100);
+                    int heightInPx = ConvertDpToPixels (100);
                     imageParams.width = widthInPx;
                     imageParams.height = heightInPx;
                     selectedImage.setLayoutParams(imageParams);
