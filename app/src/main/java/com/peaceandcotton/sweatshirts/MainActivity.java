@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     imageParams.width = widthInPx;
                     imageParams.height = heightInPx;
                     selectedImage.setLayoutParams(imageParams);
-                    selectedImage.setX((float)shirtImageView.getWidth()/4 );
+                    selectedImage.setX((float)shirtImageView.getWidth()/4 * 3 - (float) selectedImage.getWidth() );
                     selectedImage.setY((float)shirtImageView.getHeight()/4 );
                     data.setLogo(selectedOption);
                     switch (selectedOption)
@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                                 initialsText.setTextColor(Color.WHITE);
                             else
                                 initialsText.setTextColor(Color.BLACK);
-                            initialsText.setX((float)shirtImageView.getWidth()/4 );
+                            initialsText.setX((float)shirtImageView.getWidth()/4 * 3 - (float) selectedImage.getWidth()  );
                             initialsText.setY((float)shirtImageView.getHeight()/4 );
                             initialsTextInput.setVisibility(VISIBLE);
                             initialsTextView.setVisibility(VISIBLE);
