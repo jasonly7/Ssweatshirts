@@ -113,9 +113,9 @@ public class TikTokActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        signinButton = findViewById(R.id.signin_button);
-        signoutButton = findViewById(R.id.signout_button);
-        statusTextView = findViewById((R.id.statusTextView));
+//        signinButton = findViewById(R.id.signin_button);
+//        signoutButton = findViewById(R.id.signout_button);
+      //  statusTextView = findViewById((R.id.statusTextView));
 
         CheckBox checkBox1 = findViewById(R.id.checkbox1);
         CheckBox checkBox2 = findViewById(R.id.checkbox2);
@@ -268,7 +268,7 @@ public class TikTokActivity extends AppCompatActivity {
 
        // checkCurrentUserStatus();
 
-        signinButton.setOnClickListener(new View.OnClickListener() {
+       /* signinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
@@ -280,7 +280,7 @@ public class TikTokActivity extends AppCompatActivity {
             public void onClick(View v) {
                 signOut();
             }
-        });
+        });*/
 
 
     }
@@ -329,7 +329,7 @@ public class TikTokActivity extends AppCompatActivity {
         // Now mDriveService is ready to make API calls
     }
     private void updateUI(GoogleSignInAccount account) {
-        if (account != null) {
+        /*if (account != null) {
             statusTextView.setText("Signed in as: " + account.getEmail());
             signinButton.setVisibility(View.GONE);
             signoutButton.setVisibility(View.VISIBLE);
@@ -341,7 +341,7 @@ public class TikTokActivity extends AppCompatActivity {
             signoutButton.setVisibility(View.GONE);
             // Optionally, disable features requiring sign-in
             // findViewById(R.id.uploadButton).setEnabled(false);
-        }
+        }*/
     }
     private void checkCurrentUserStatus() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);

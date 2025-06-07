@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Color"
-                android:textSize="20sp">
+                android:textSize="15sp">
             </TextView>
 
             <LinearLayout
@@ -36,24 +36,24 @@
                 >
                 <ImageView
                     android:id="@+id/sweater1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/blackcrew"
                     android:layout_margin="20dp"
                     android:contentDescription="Draggable Image" />
 
                 <ImageView
                     android:id="@+id/sweater2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/light_steel_crew"
                     android:layout_margin="20dp"
                     android:contentDescription="Draggable Image 2" />
 
                 <ImageView
                     android:id="@+id/sweater3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:src="@drawable/sand_crew"
                     android:layout_margin="20dp"
                     android:contentDescription="Draggable Image 3" />
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Size"
-                android:textSize="20sp">
+                android:textSize="15sp">
             </TextView>
 
 
@@ -79,28 +79,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="M"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
 
                 <RadioButton
                     android:id="@+id/radioOption2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="L"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
 
                 <RadioButton
                     android:id="@+id/radioOption3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="XL"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
 
             </RadioGroup>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Logo"
-                android:textSize="20sp">
+                android:textSize="15sp">
             </TextView>
             <LinearLayout
                 android:id="@+id/horizontalLinearLayout4"
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Vibey"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                 />
 
 
@@ -130,21 +130,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Slay"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
 
                 <RadioButton
                     android:id="@+id/logoRadioOption3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Maple Leaf"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
 
                 <RadioButton
                     android:id="@+id/logoRadioOption4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Initials"
-                    android:textSize="20sp"/>
+                    android:textSize="15sp"/>
 
                 </RadioGroup>
 
@@ -161,14 +161,14 @@
                     android:layout_height="wrap_content"
                     android:text="Initials"
                     android:visibility="gone"
-                    android:textSize="20sp">
+                    android:textSize="15sp">
                 </TextView>
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/initialsTextInput"
                     android:maxLength="4"
                     android:layout_width="200dp"
                     android:layout_height="50dp"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:visibility="gone"
                     android:hint="4 letters max"/>
 
@@ -184,8 +184,8 @@
             >
                 <ImageView
                     android:id="@+id/shirtImageView"
-                    android:layout_width="400dp"
-                    android:layout_height="400dp"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
                     android:contentDescription="Shirt Image"
                     android:gravity="center"
                     android:src="@drawable/blackcrew"
@@ -194,8 +194,8 @@
 
                 <ImageView
                     android:id="@+id/selectedImage"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
 
                     android:contentDescription="Draggable Image"
                     android:gravity="center|center_horizontal|center_vertical" />
@@ -222,7 +222,7 @@
                     android:layout_height="wrap_content"
                     android:text="Back"
                     android:layout_centerInParent="true"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     />
             <Button
                 android:id="@+id/submit_button"
@@ -230,7 +230,7 @@
                 android:layout_height="wrap_content"
                 android:text="Submit"
                 android:layout_centerInParent="true"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 />
             </LinearLayout>
         </LinearLayout>
